@@ -39,9 +39,11 @@ import { PressureChart } from "./pressure-chart"
 import { SensorStatusList } from "./sensor-status-list"
 import { SensorMap } from "./sensor-map"
 import { DateRangePicker } from "./date-range-picker"
+import { useSensorData } from "@/hooks/useSensorData"
 
 export default function Dashboard() {
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const { data, currentReadings } = useSensorData()
 
   const handleRefresh = () => {
     setIsRefreshing(true)
@@ -152,7 +154,7 @@ export default function Dashboard() {
                     <Thermometer className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">24.5°C</div>
+                    <div className="text-2xl font-bold">{currentReadings.temperature}°C</div>
                     <p className="text-xs text-muted-foreground">+2.1% from last hour</p>
                   </CardContent>
                 </Card>
@@ -162,7 +164,7 @@ export default function Dashboard() {
                     <Droplets className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">48%</div>
+                    <div className="text-2xl font-bold">{currentReadings.humidity}%</div>
                     <p className="text-xs text-muted-foreground">-0.5% from last hour</p>
                   </CardContent>
                 </Card>
@@ -172,7 +174,7 @@ export default function Dashboard() {
                     <Wind className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">1013 hPa</div>
+                    <div className="text-2xl font-bold">{currentReadings.pressure} hPa</div>
                     <p className="text-xs text-muted-foreground">+0.2% from last hour</p>
                   </CardContent>
                 </Card>
@@ -182,7 +184,7 @@ export default function Dashboard() {
                     <Battery className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">87%</div>
+                    <div className="text-2xl font-bold">{currentReadings.battery}%</div>
                     <p className="text-xs text-muted-foreground">-0.3% from last hour</p>
                   </CardContent>
                 </Card>
@@ -215,13 +217,13 @@ export default function Dashboard() {
                         <TabsTrigger value="pressure">Pressure</TabsTrigger>
                       </TabsList>
                       <TabsContent value="temperature">
-                        <TemperatureChart />
+                        <TemperatureChart data={data.temperature} />
                       </TabsContent>
                       <TabsContent value="humidity">
-                        <HumidityChart />
+                        <HumidityChart data={data.humidity} />
                       </TabsContent>
                       <TabsContent value="pressure">
-                        <PressureChart />
+                        <PressureChart data={data.pressure} />
                       </TabsContent>
                     </Tabs>
                   </CardContent>

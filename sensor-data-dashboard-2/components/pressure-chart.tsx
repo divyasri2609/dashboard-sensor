@@ -2,23 +2,9 @@
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts"
 
-// Sample data for pressure readings
-const data = [
-  { time: "00:00", sensor1: 1012, sensor2: 1013, sensor3: 1011 },
-  { time: "02:00", sensor1: 1012, sensor2: 1013, sensor3: 1011 },
-  { time: "04:00", sensor1: 1011, sensor2: 1012, sensor3: 1010 },
-  { time: "06:00", sensor1: 1011, sensor2: 1012, sensor3: 1010 },
-  { time: "08:00", sensor1: 1012, sensor2: 1013, sensor3: 1011 },
-  { time: "10:00", sensor1: 1013, sensor2: 1014, sensor3: 1012 },
-  { time: "12:00", sensor1: 1014, sensor2: 1015, sensor3: 1013 },
-  { time: "14:00", sensor1: 1013, sensor2: 1014, sensor3: 1012 },
-  { time: "16:00", sensor1: 1013, sensor2: 1014, sensor3: 1012 },
-  { time: "18:00", sensor1: 1012, sensor2: 1013, sensor3: 1011 },
-  { time: "20:00", sensor1: 1012, sensor2: 1013, sensor3: 1011 },
-  { time: "22:00", sensor1: 1011, sensor2: 1012, sensor3: 1010 },
-]
+export function PressureChart({ data }: { data?: any[] }) {
+  if (!data) return null;
 
-export function PressureChart() {
   return (
     <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
